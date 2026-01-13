@@ -2,8 +2,11 @@ package com.SpringBoot.FirstSpringBoot.Service;
 
 
 
+import com.SpringBoot.FirstSpringBoot.Controller.userController;
 import com.SpringBoot.FirstSpringBoot.ExceptionHandling.userNotFoundException;
 import com.SpringBoot.FirstSpringBoot.Model.user;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,8 +18,10 @@ import java.util.Map;
 public class userService {
 
     static Map<Integer, user> userdb = new HashMap<>();
+  private final   static Logger logger = LoggerFactory.getLogger(userController.class);
 
     public static user createUser(user user) {
+        logger.info("Creating user ............INFO");
         System.out.println(user.getGamil());
         userdb.put(user.getId(), user);
         return user;
@@ -25,7 +30,7 @@ public class userService {
     public static user updateUser(user user)  {
         if (!userdb.containsKey(user.getId()))
           throw new userNotFoundException("user with this id " + user.getId()+"not exits ");
-           userdb.put(user.getId(), user);
+        userdb.put(user.getId(), user);
            return user;
     }
 
